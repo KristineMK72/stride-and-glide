@@ -1,14 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "leaflet/dist/leaflet.css";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Stride & Glide",
   description:
     "Track workouts, routes, food, water, calories, and fitness progress.",
-
   applicationName: "Stride & Glide",
-
   keywords: [
     "fitness",
     "walking",
@@ -20,26 +19,23 @@ export const metadata: Metadata = {
     "diet tracker",
     "workout tracker",
   ],
-
   authors: [
     {
       name: "Kristine Kahler",
     },
   ],
-
-  themeColor: "#312e81",
-
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-  },
-
   openGraph: {
     title: "Stride & Glide",
     description:
       "Track workouts, routes, nutrition, miles, speed, and momentum.",
     type: "website",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#312e81",
 };
 
 export default function RootLayout({
@@ -49,7 +45,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
