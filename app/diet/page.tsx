@@ -2,63 +2,102 @@ const meals = [
   {
     title: "Breakfast",
     options: [
-      "Greek yogurt + berries + granola",
-      "Eggs + spinach + toast",
-      "Protein smoothie with banana",
-      "Oatmeal + peanut butter + protein",
+      "Eggs + bacon + avocado",
+      "Full-fat Greek yogurt + raspberries + walnuts",
+      "Sausage links + spinach scramble",
+      "Coffee with heavy cream + eggs",
     ],
   },
   {
     title: "Lunch",
     options: [
-      "Chicken rice bowl",
-      "Turkey wrap + veggies",
-      "Tuna salad + crackers",
-      "Cottage cheese bowl + fruit",
+      "Chicken lettuce wraps",
+      "Turkey + salami roll-ups with cheese",
+      "Ground beef taco bowl over lettuce",
+      "Chicken thighs + cucumber salad",
     ],
   },
   {
     title: "Dinner",
     options: [
-      "Salmon + sweet potato + broccoli",
-      "Turkey burger bowl",
-      "Chicken tacos on corn tortillas",
-      "Stir fry with rice and veggies",
+      "Salmon + asparagus + butter",
+      "Ribeye steak + mushrooms",
+      "Pork chops + cauliflower mash",
+      "White fish or shrimp + zucchini",
     ],
   },
   {
     title: "Snacks",
     options: [
-      "String cheese",
-      "Hard-boiled eggs",
-      "Apple + peanut butter",
-      "Protein shake",
-      "Cottage cheese",
+      "Cheddar cheese",
+      "Green olives",
+      "Walnuts",
+      "Avocado with salt + pepper",
+      "Turkey slices",
     ],
   },
 ];
 
-const shopping = [
-  "Greek yogurt",
-  "Eggs",
-  "Chicken breast",
-  "Ground turkey",
-  "Salmon or tuna",
-  "Cottage cheese",
-  "Protein powder",
-  "Bananas",
-  "Berries",
-  "Apples",
-  "Spinach",
-  "Broccoli",
-  "Asparagus",
-  "Sweet potatoes",
-  "Brown rice",
-  "Oatmeal",
-  "Corn tortillas",
-  "Peanut butter",
-  "String cheese",
-  "Unsweetened tea",
+const grocerySections = [
+  {
+    title: "Fats, Oils & Dairy",
+    emoji: "🧈",
+    items: [
+      "Butter",
+      "Coconut oil",
+      "Olive oil",
+      "Heavy cream",
+      "Full-fat plain Greek yogurt",
+      "Cheddar cheese",
+      "Sour cream",
+    ],
+  },
+  {
+    title: "Proteins & Eggs",
+    emoji: "🥩",
+    items: [
+      "Eggs — grab an extra carton",
+      "Bacon",
+      "Sausage links",
+      "Chicken breast",
+      "Chicken thighs, skin-on",
+      "Ground beef or turkey",
+      "Ribeye steak or preferred fatty cut of beef",
+      "Pork chops",
+      "Salmon",
+      "White fish or shrimp",
+      "Salami",
+      "Turkey slices",
+    ],
+  },
+  {
+    title: "Produce",
+    emoji: "🥑",
+    items: [
+      "Avocados",
+      "Spinach",
+      "Lettuce",
+      "Broccoli",
+      "Cauliflower",
+      "Zucchini",
+      "Cucumber",
+      "Asparagus",
+      "Mushrooms",
+      "Raspberries",
+      "Garlic",
+    ],
+  },
+  {
+    title: "Pantry & Extras",
+    emoji: "🫒",
+    items: [
+      "Walnuts",
+      "Green olives",
+      "Salsa — no added sugar",
+      "Black pepper",
+      "Taco seasoning — check for hidden starches",
+    ],
+  },
 ];
 
 export default function DietPage() {
@@ -66,9 +105,19 @@ export default function DietPage() {
     <main style={styles.page}>
       <section style={styles.hero}>
         <p style={styles.eyebrow}>Diet Plan</p>
-        <h1 style={styles.title}>Eat for energy, protein, and fat loss.</h1>
+        <h1 style={styles.title}>Keto-friendly fuel for movement.</h1>
         <p style={styles.subtitle}>
-          Simple meals for walking, running, rollerblading, and staying full.
+          Simple meals and a structured shopping list for high-protein,
+          lower-carb eating while you walk, run, skate, bike, and build
+          momentum.
+        </p>
+      </section>
+
+      <section style={styles.notice}>
+        <h2>Daily Focus</h2>
+        <p>
+          Prioritize protein, water, low-carb vegetables, and healthy fats.
+          Before harder workouts, keep fuel simple and listen to your energy.
         </p>
       </section>
 
@@ -86,12 +135,27 @@ export default function DietPage() {
       </section>
 
       <section style={styles.cardWide}>
-        <h2>Shopping List</h2>
-        <div style={styles.shoppingGrid}>
-          {shopping.map((item) => (
-            <label key={item} style={styles.checkItem}>
-              <input type="checkbox" /> {item}
-            </label>
+        <p style={styles.sectionEyebrow}>Shopping List</p>
+        <h2>Keto Grocery List</h2>
+        <p style={styles.muted}>
+          Organized by section so it is easy to grab what you need at the store.
+        </p>
+
+        <div style={styles.groceryGrid}>
+          {grocerySections.map((section) => (
+            <div key={section.title} style={styles.grocerySection}>
+              <h3>
+                <span>{section.emoji}</span> {section.title}
+              </h3>
+
+              <div style={styles.shoppingGrid}>
+                {section.items.map((item) => (
+                  <label key={item} style={styles.checkItem}>
+                    <input type="checkbox" /> {item}
+                  </label>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </section>
@@ -111,6 +175,7 @@ const styles: Record<string, React.CSSProperties> = {
   hero: {
     maxWidth: 1100,
     margin: "0 auto 22px",
+    paddingTop: 22,
   },
   eyebrow: {
     color: "#bbf7d0",
@@ -126,6 +191,16 @@ const styles: Record<string, React.CSSProperties> = {
   subtitle: {
     fontSize: 19,
     color: "rgba(255,255,255,0.85)",
+    lineHeight: 1.5,
+    maxWidth: 820,
+  },
+  notice: {
+    maxWidth: 1100,
+    margin: "0 auto 18px",
+    padding: 20,
+    borderRadius: 24,
+    background: "rgba(255,255,255,0.12)",
+    border: "1px solid rgba(255,255,255,0.18)",
   },
   grid: {
     maxWidth: 1100,
@@ -139,6 +214,7 @@ const styles: Record<string, React.CSSProperties> = {
     borderRadius: 26,
     background: "rgba(255,255,255,0.96)",
     color: "#111827",
+    boxShadow: "0 18px 55px rgba(0,0,0,0.24)",
   },
   cardWide: {
     maxWidth: 1100,
@@ -147,6 +223,29 @@ const styles: Record<string, React.CSSProperties> = {
     borderRadius: 26,
     background: "rgba(255,255,255,0.96)",
     color: "#111827",
+    boxShadow: "0 18px 55px rgba(0,0,0,0.24)",
+  },
+  sectionEyebrow: {
+    textTransform: "uppercase",
+    letterSpacing: 2,
+    color: "#16a34a",
+    fontWeight: 900,
+    margin: 0,
+  },
+  muted: {
+    color: "#64748b",
+    lineHeight: 1.5,
+  },
+  groceryGrid: {
+    display: "grid",
+    gap: 18,
+    marginTop: 18,
+  },
+  grocerySection: {
+    padding: 16,
+    borderRadius: 20,
+    background: "#f8fafc",
+    border: "1px solid #e2e8f0",
   },
   shoppingGrid: {
     display: "grid",
@@ -154,9 +253,12 @@ const styles: Record<string, React.CSSProperties> = {
     gap: 10,
   },
   checkItem: {
+    display: "flex",
+    alignItems: "center",
+    gap: 8,
     padding: 12,
     borderRadius: 14,
-    background: "#f1f5f9",
+    background: "#eef2ff",
     fontWeight: 700,
   },
 };
